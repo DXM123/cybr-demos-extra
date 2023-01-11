@@ -8,6 +8,7 @@ mkdir -p "$CONTAINER_VOLUME_PATH"/"$CONTAINER_NAME"_"$CONTAINER_TAG"/{config,sec
 cp -v $SCRIPT_DIR/seccomp.json $CONTAINER_VOLUME_PATH/"$CONTAINER_NAME"_"$CONTAINER_TAG"/security/
 
 if [ -z $SUDO ] && [ $(whoami) != "root" ]; then
+	# run the following command to allow podman (rootless) binding to port 443.
         sudo sysctl net.ipv4.ip_unprivileged_port_start=443
         sudo loginctl enable-linger $(whoami)
 fi
